@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 
 export const Navbar = () => {
   return (
-    <nav className="flex justify-end gap-2 p-2 shadow">
+    <nav className="fixed flex w-full justify-end gap-2 bg-white p-2 shadow">
       <Button asChild variant="outline">
         <NavLink to="/">About us</NavLink>
       </Button>
