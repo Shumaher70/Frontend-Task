@@ -1,4 +1,11 @@
+import { SignInCard } from "@/features/constants";
+import { SignInLayout } from "@/app/pages/constants";
+
 const SignInPage = () => {
-  return <div>SignInPage</div>;
+  return (
+    <SignInLayout>
+      <SignInCard />
+    </SignInLayout>
+  );
 };
 export default SignInPage;
