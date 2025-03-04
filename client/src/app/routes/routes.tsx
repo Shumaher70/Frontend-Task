@@ -1,10 +1,12 @@
-import {
-  ProfilePage,
-  AboutUsPage,
-  SignInPage,
-  ErrorPage,
-} from "@/app/pages/constants";
 import { JSX } from "react";
+
+import {
+  ErrorPage,
+  SignInPage,
+  AboutUsPage,
+  ProfilePage,
+} from "@/app/pages/constants";
+import ProtectedRoute from "./protected-route";
 
 interface IRoutes {
   path: string;
@@ -14,6 +16,6 @@ interface IRoutes {
 export const routes: IRoutes[] = [
   { path: "/", element: <AboutUsPage /> },
   { path: "/*", element: <ErrorPage /> },
-  { path: "/profile", element: <ProfilePage /> },
   { path: "/login", element: <SignInPage /> },
+  { path: "/profile", element: <ProtectedRoute element={<ProfilePage />} /> },
 ];
