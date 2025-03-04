@@ -4,8 +4,9 @@ import { useAuthStore } from "./auth/state/use-auth-store";
 import { SignInCard } from "./auth/components/sign-in-card";
 import { useQuoteStore } from "./profile/state/useQuoteStore";
 import { DialogQuote } from "./profile/components/dialog-quote";
-
+import { useLogout } from "./auth/api/use-logout";
 export {
+  useLogout,
   useGetInfo,
   SignInCard,
   DialogQuote,
