@@ -1,11 +1,17 @@
 import { toast } from "sonner";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 import { TLoginRequestType } from "../types";
+import { useAuthStore } from "../../constants";
 
 export const useLogin = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const { login } = useAuthStore();
+
+  const navigate = useNavigate();
 
   const mutate = async ({ email, password }: TLoginRequestType) => {
     setError(null);
@@ -29,6 +35,9 @@ export const useLogin = () => {
       if (!data.success) {
         throw new Error("Failed to login");
       }
+
+      login(data.data.token);
+      navigate("/profile");
 
       toast.success("Logged in successfully!");
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
