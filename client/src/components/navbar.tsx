@@ -13,21 +13,23 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="fixed flex w-full justify-end gap-2 bg-white p-2 shadow">
-      <Button asChild variant="outline">
-        <NavLink to="/">About us</NavLink>
-      </Button>
-      {isAuthenticated && (
+    <nav className="fixed w-full bg-white p-2 shadow">
+      <div className="mx-auto flex max-w-7xl justify-end gap-2">
         <Button asChild variant="outline">
-          <NavLink to="/profile">Profile</NavLink>
+          <NavLink to="/">About us</NavLink>
         </Button>
-      )}
-      {!isAuthenticated && (
-        <Button asChild variant="outline">
-          <NavLink to="/login">Sign in</NavLink>
-        </Button>
-      )}
-      {isAuthenticated && <Button onClick={handleLogout}>Sign out</Button>}
+        {isAuthenticated && (
+          <Button asChild variant="outline">
+            <NavLink to="/profile">Profile</NavLink>
+          </Button>
+        )}
+        {!isAuthenticated && (
+          <Button asChild variant="outline">
+            <NavLink to="/login">Sign in</NavLink>
+          </Button>
+        )}
+        {isAuthenticated && <Button onClick={handleLogout}>Sign out</Button>}
+      </div>
     </nav>
   );
 };
