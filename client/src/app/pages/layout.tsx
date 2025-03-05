@@ -5,5 +5,5 @@ interface ILayoutApp {
 }
 
 export const LayoutApp = ({ children }: ILayoutApp) => {
-  return <div className="pt-[50px]">{children}</div>;
+  return <div className="bg-neutral-100 pt-[50px]">{children}</div>;
 };
