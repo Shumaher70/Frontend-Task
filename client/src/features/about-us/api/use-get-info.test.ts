@@ -1,7 +1,7 @@
 import { setupServer } from "msw/node";
 import { http, HttpResponse } from "msw";
 import { useGetInfo } from "./use-get-info";
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 
 const server = setupServer();
 
