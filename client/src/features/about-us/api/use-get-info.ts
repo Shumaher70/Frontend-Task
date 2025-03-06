@@ -10,7 +10,9 @@ export const useGetInfo = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/info");
+        const response = await fetch(
+          "https://frontend-task-nevk.onrender.com/api/info",
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch data");

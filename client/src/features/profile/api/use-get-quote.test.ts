@@ -1,7 +1,7 @@
 import { vi } from "vitest";
 import { setupServer } from "msw/node";
 import { http, HttpResponse } from "msw";
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act, waitFor } from "@testing-library/react";
 
 import { useGetQuote } from "./use-get-quote";
 
@@ -27,19 +27,20 @@ describe("useGetQuote", () => {
         });
       }),
     );
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useGetQuote("test-token"),
-    );
+    const { result } = renderHook(() => useGetQuote("test-token"));
     act(() => {
       result.current.fetchQuote();
     });
-    await waitForNextUpdate();
-    expect(result.current.loadingAuthor).toBe(true);
-    expect(result.current.loadingQuote).toBe(true);
-    expect(result.current.error).toBeNull();
-    expect(result.current.data).toEqual({
-      author: "Mark Twain",
-      quote: "The secret of getting ahead is getting started.",
+    ////////////////////////////////////////////
+
+    await waitFor(() => {
+      expect(result.current.loadingAuthor).toBe(true);
+      expect(result.current.loadingQuote).toBe(true);
+      expect(result.current.error).toBeNull();
+      expect(result.current.data).toEqual({
+        author: "Mark Twain",
+        quote: "The secret of getting ahead is getting started.",
+      });
     });
   });
 
@@ -49,17 +50,18 @@ describe("useGetQuote", () => {
         return new HttpResponse(null, { status: 500 });
       }),
     );
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useGetQuote("test-token"),
-    );
+    const { result } = renderHook(() => useGetQuote("test-token"));
     act(() => {
       result.current.fetchQuote();
     });
-    await waitForNextUpdate();
-    expect(result.current.loadingAuthor).toBe(false);
-    expect(result.current.loadingQuote).toBe(false);
-    expect(result.current.error).toContain("Error");
-    expect(result.current.data).toBeNull();
+    /////////////////////////////////////
+
+    await waitFor(() => {
+      expect(result.current.loadingAuthor).toBe(false);
+      expect(result.current.loadingQuote).toBe(false);
+      expect(result.current.error).toContain("Error");
+      expect(result.current.data).toBeNull();
+    });
   });
 
   it("should abort previous requests on new fetchQuote call", async () => {
