@@ -23,7 +23,7 @@ export const useGetQuote = (token: string) => {
 
     try {
       const authorResponse = await fetch(
-        `http://localhost:5000/api/author?token=${token}`,
+        `https://frontend-task-nevk.onrender.com/api/author?token=${token}`,
         { signal: controller.signal },
       );
 
@@ -38,7 +38,7 @@ export const useGetQuote = (token: string) => {
       setLoadingAuthor(true);
 
       const quoteResponse = await fetch(
-        `http://localhost:5000/api/quote?token=${token}&authorId=${author.data.authorId}`,
+        `https://frontend-task-nevk.onrender.com/api/quote?token=${token}&authorId=${author.data.authorId}`,
         { signal: controller.signal },
       );
 
